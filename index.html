@@ -14,19 +14,17 @@
     }
 
     :root {
-      --bg1: #070914;
-      --bg2: #0b1020;
-      --bg3: #111735;
+      --bg1: #050814;
+      --bg2: #0a1020;
+      --bg3: #141b37;
       --text: #f5f7ff;
-      --sub: #d8def7;
-      --muted: #9ba8d6;
+      --sub: #d9dff7;
+      --muted: #9da9d1;
       --line: rgba(255,255,255,0.09);
       --card: rgba(255,255,255,0.06);
-      --card-strong: rgba(255,255,255,0.10);
-      --purple: #a27cff;
+      --purple: #a282ff;
       --purple2: #7f62ff;
-      --blue: #77a7ff;
-      --glow: rgba(162,124,255,0.45);
+      --blue: #79a8ff;
     }
 
     body {
@@ -35,9 +33,9 @@
       color: var(--text);
       background:
         radial-gradient(circle at 20% 0%, rgba(127, 98, 255, 0.16), transparent 28%),
-        radial-gradient(circle at 85% 12%, rgba(119, 167, 255, 0.14), transparent 22%),
-        radial-gradient(circle at 50% 100%, rgba(162, 124, 255, 0.10), transparent 28%),
-        linear-gradient(180deg, var(--bg2) 0%, var(--bg1) 45%, #05070f 100%);
+        radial-gradient(circle at 85% 12%, rgba(121, 168, 255, 0.14), transparent 22%),
+        radial-gradient(circle at 50% 100%, rgba(162, 130, 255, 0.10), transparent 28%),
+        linear-gradient(180deg, var(--bg2) 0%, var(--bg1) 45%, #04060d 100%);
       overflow-x: hidden;
     }
 
@@ -45,12 +43,12 @@
     .aurora::before,
     .aurora::after {
       position: fixed;
-      inset: auto;
       content: "";
       pointer-events: none;
       z-index: 0;
       filter: blur(70px);
       opacity: 0.6;
+      border-radius: 50%;
     }
 
     .aurora {
@@ -67,7 +65,7 @@
       height: 280px;
       right: -980px;
       top: 120px;
-      background: rgba(119, 167, 255, 0.18);
+      background: rgba(121, 168, 255, 0.18);
       animation: drift2 20s ease-in-out infinite;
     }
 
@@ -92,7 +90,7 @@
       position: absolute;
       width: 2px;
       height: 2px;
-      background: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.82);
       border-radius: 50%;
       box-shadow: 0 0 8px rgba(255,255,255,0.7);
       animation: twinkle 3s ease-in-out infinite;
@@ -135,7 +133,7 @@
 
     .logo span {
       color: var(--purple);
-      text-shadow: 0 0 18px rgba(162,124,255,0.5);
+      text-shadow: 0 0 18px rgba(162,130,255,0.5);
     }
 
     .top-links {
@@ -185,7 +183,7 @@
       font-weight: 700;
       color: #f1edff;
       background: rgba(127, 98, 255, 0.14);
-      border: 1px solid rgba(162,124,255,0.35);
+      border: 1px solid rgba(162,130,255,0.35);
       box-shadow: 0 0 25px rgba(127,98,255,0.12);
       animation: fadeUp 0.8s ease-out 0.1s both;
     }
@@ -325,7 +323,7 @@
       left: -80px;
       top: -80px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(162,124,255,0.24), transparent 70%);
+      background: radial-gradient(circle, rgba(162,130,255,0.24), transparent 70%);
       filter: blur(12px);
       pointer-events: none;
     }
@@ -338,7 +336,7 @@
       right: -90px;
       bottom: -90px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(119,167,255,0.16), transparent 70%);
+      background: radial-gradient(circle, rgba(121,168,255,0.16), transparent 70%);
       filter: blur(16px);
       pointer-events: none;
     }
@@ -378,18 +376,12 @@
 
     .preview-path {
       fill: none;
-      stroke: rgba(162,124,255,0.95);
+      stroke: rgba(162,130,255,0.95);
       stroke-width: 5;
       stroke-linecap: round;
       stroke-dasharray: 900;
       stroke-dashoffset: 900;
       animation: drawPath 2.5s ease forwards;
-    }
-
-    .glow-node {
-      fill: rgba(255,255,255,0.98);
-      filter: drop-shadow(0 0 14px rgba(255,255,255,0.8));
-      animation: nodeBreath 2.2s ease-in-out infinite;
     }
 
     .moving-orb {
@@ -400,7 +392,7 @@
       background: radial-gradient(circle at 35% 35%, #ffffff, #efe5ff 45%, #b592ff 72%, #8c6cff 100%);
       box-shadow:
         0 0 20px rgba(255,255,255,0.85),
-        0 0 42px rgba(162,124,255,0.58);
+        0 0 42px rgba(162,130,255,0.58);
       transform: translate(-50%, -50%);
       z-index: 4;
     }
@@ -412,19 +404,19 @@
       inset: 50%;
       transform: translate(-50%, -50%);
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.35);
+      border: 1px solid rgba(255,255,255,0.30);
       opacity: 0;
-      animation: ripple 2.2s ease-out infinite;
+      animation: ripple 2.3s ease-out infinite;
     }
 
     .moving-orb::before {
-      width: 28px;
-      height: 28px;
+      width: 30px;
+      height: 30px;
     }
 
     .moving-orb::after {
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       animation-delay: 0.8s;
     }
 
@@ -491,15 +483,10 @@
     }
 
     .shot-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: #e8ecff;
-      letter-spacing: 0.4px;
-    }
-
-    .shot-sub {
-      font-size: 13px;
-      color: var(--muted);
+      font-size: 22px;
+      font-weight: 800;
+      color: #edf0ff;
+      letter-spacing: 0.2px;
     }
 
     .shot-grid {
@@ -522,7 +509,7 @@
     .shot:hover {
       transform: translateY(-6px) scale(1.02);
       box-shadow: 0 18px 34px rgba(0,0,0,0.26);
-      border-color: rgba(162,124,255,0.35);
+      border-color: rgba(162,130,255,0.35);
     }
 
     .shot img {
@@ -622,7 +609,7 @@
       height: 160px;
       right: -60px;
       bottom: -60px;
-      background: radial-gradient(circle, rgba(162,124,255,0.18), transparent 70%);
+      background: radial-gradient(circle, rgba(162,130,255,0.18), transparent 70%);
       opacity: 0;
       transition: opacity 0.24s ease;
     }
@@ -641,7 +628,7 @@
       font-size: 24px;
       margin-bottom: 16px;
       background: rgba(127, 98, 255, 0.18);
-      border: 1px solid rgba(162,124,255,0.28);
+      border: 1px solid rgba(162,130,255,0.28);
       box-shadow: 0 0 24px rgba(127,98,255,0.14);
       animation: floatTiny 2.8s ease-in-out infinite;
     }
@@ -713,10 +700,10 @@
 
     @keyframes titleGlow {
       from {
-        text-shadow: 0 0 0 rgba(162,124,255,0);
+        text-shadow: 0 0 0 rgba(162,130,255,0);
       }
       to {
-        text-shadow: 0 0 28px rgba(162,124,255,0.24);
+        text-shadow: 0 0 28px rgba(162,130,255,0.24);
       }
     }
 
@@ -743,14 +730,9 @@
       to { stroke-dashoffset: 0; }
     }
 
-    @keyframes nodeBreath {
-      0%, 100% { transform: scale(1); opacity: 0.92; }
-      50% { transform: scale(1.18); opacity: 1; }
-    }
-
     @keyframes ripple {
       0% {
-        opacity: 0.45;
+        opacity: 0.4;
         transform: translate(-50%, -50%) scale(0.55);
       }
       100% {
@@ -858,6 +840,7 @@
 </head>
 <body>
   <div class="aurora"></div>
+
   <div class="stars">
     <span style="left:5%; top:16%; animation-delay:0s;"></span>
     <span style="left:14%; top:8%; animation-delay:1.2s;"></span>
@@ -876,6 +859,7 @@
     <span style="left:72%; top:58%; animation-delay:0.7s;"></span>
     <span style="left:88%; top:46%; animation-delay:1.4s;"></span>
   </div>
+
   <div class="grid-overlay"></div>
 
   <div class="container">
@@ -893,8 +877,8 @@
         <div class="badge">GRAPH × RHYTHM GAME</div>
         <h1>Rhythm Graph</h1>
         <p class="hero-text">
-          그래프의 흐름과 리듬 게임의 타이밍을 결합한 독특한 플레이.
-          화면의 움직임을 읽고 정확한 순간을 맞춰, 점수와 콤보를 쌓아가는 감각적인 리듬 게임입니다.
+          그래프의 흐름과 리듬 게임의 타이밍을 결합한 감각적인 플레이.
+          화면의 움직임을 읽고 정확한 순간을 맞춰, 점수와 콤보를 쌓아가는 독특한 리듬 게임입니다.
         </p>
 
         <div class="hero-buttons">
@@ -922,10 +906,6 @@
                 class="preview-path"
                 d="M0,145 C60,55 120,40 175,108 C225,170 285,170 340,95 C395,20 450,28 505,108 C548,170 575,165 600,72">
               </path>
-
-              <circle class="glow-node" cx="175" cy="108" r="6"></circle>
-              <circle class="glow-node" cx="340" cy="95" r="6"></circle>
-              <circle class="glow-node" cx="505" cy="108" r="6"></circle>
             </svg>
 
             <div class="moving-orb" id="movingOrb"></div>
@@ -950,7 +930,6 @@
         <div class="shot-card" id="screenshots">
           <div class="shot-header">
             <div class="shot-title">게임 스크린샷</div>
-            <div class="shot-sub">이미지 파일만 바꾸면 됨</div>
           </div>
 
           <div class="shot-grid">
@@ -975,7 +954,7 @@
       <h2 class="section-title">게임 소개</h2>
       <p class="section-text">
         Rhythm Graph는 수학적인 그래프의 흐름과 리듬 게임의 타이밍 요소를 결합한 게임입니다.
-        단순히 노트를 누르는 것이 아니라, 그래프가 흘러가는 방식과 시각적 리듬을 읽어야 더 좋은 판정을 얻을 수 있습니다.
+        단순히 입력을 누르는 것을 넘어서, 그래프가 흘러가는 방식과 시각적 리듬을 함께 읽어야 더 좋은 판정을 얻을 수 있습니다.
         화면의 아름다움과 플레이 감각이 함께 살아나는 것이 이 게임의 핵심입니다.
       </p>
     </section>
@@ -1006,7 +985,7 @@
           <div class="feature-icon">✨</div>
           <h3>몽환적인 연출</h3>
           <p>
-            네온 보라빛 배경과 부드러운 움직임, 빛나는 포인트 효과로
+            네온 보라빛 배경과 부드러운 움직임, 빛나는 효과로
             차분하면서도 몰입감 있는 플레이 경험을 제공합니다.
           </p>
         </div>
