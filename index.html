@@ -310,27 +310,51 @@
       overflow: hidden;
     }
 
-    .chart-line {
+    .chart-svg {
       position: absolute;
       inset: 0;
-    }
-
-    .chart-line svg {
       width: 100%;
       height: 100%;
+      z-index: 2;
+    }
+
+    .chart-path {
+      fill: none;
+      stroke: rgba(162, 136, 255, 0.95);
+      stroke-width: 5;
+      stroke-linecap: round;
+      stroke-dasharray: 900;
+      stroke-dashoffset: 900;
+      animation: drawPath 2.6s ease forwards;
+    }
+
+    .chart-node {
+      fill: rgba(255,255,255,0.95);
+      transform-origin: center;
+      animation: pulseNode 1.8s ease-in-out infinite;
+    }
+
+    .chart-node:nth-of-type(2) {
+      animation-duration: 1.6s;
+    }
+
+    .chart-node:nth-of-type(3) {
+      animation-duration: 2s;
     }
 
     .moving-dot {
-      offset-path: path("M 20 160 C 80 60, 150 50, 210 110 C 270 170, 340 165, 400 105 C 455 50, 520 45, 580 85");
-      offset-rotate: 0deg;
       position: absolute;
       width: 16px;
       height: 16px;
       border-radius: 50%;
       background: white;
-      box-shadow: 0 0 18px rgba(255,255,255,0.95), 0 0 34px rgba(145, 118, 255, 0.65);
-      animation: moveDot 4s linear infinite;
-      z-index: 3;
+      box-shadow:
+        0 0 18px rgba(255,255,255,0.95),
+        0 0 34px rgba(145, 118, 255, 0.65);
+      z-index: 4;
+      left: 0;
+      top: 0;
+      transform: translate(-50%, -50%);
     }
 
     .scan-line {
@@ -339,6 +363,7 @@
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.10), transparent);
       transform: translateX(-100%);
       animation: scan 3.6s linear infinite;
+      z-index: 1;
     }
 
     .stats {
@@ -532,12 +557,8 @@
     }
 
     @keyframes shine {
-      0% {
-        left: -120%;
-      }
-      100% {
-        left: 140%;
-      }
+      0% { left: -120%; }
+      100% { left: 140%; }
     }
 
     @keyframes pulseButton {
@@ -550,39 +571,29 @@
     }
 
     @keyframes floatCard {
-      0%, 100% {
-        transform: translateY(0px);
-      }
-      50% {
-        transform: translateY(-8px);
-      }
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
     }
 
     @keyframes iconBob {
-      0%, 100% {
-        transform: translateY(0px);
-      }
-      50% {
-        transform: translateY(-4px);
-      }
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-4px); }
     }
 
     @keyframes scan {
-      0% {
-        transform: translateX(-100%);
-      }
-      100% {
-        transform: translateX(140%);
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(140%); }
+    }
+
+    @keyframes drawPath {
+      to {
+        stroke-dashoffset: 0;
       }
     }
 
-    @keyframes moveDot {
-      0% {
-        offset-distance: 0%;
-      }
-      100% {
-        offset-distance: 100%;
-      }
+    @keyframes pulseNode {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.25); }
     }
 
     @media (max-width: 980px) {
@@ -688,35 +699,22 @@
       <div class="hero-card">
         <div class="card-label">Live Preview</div>
 
-        <div class="fake-chart">
+        <div class="fake-chart" id="chartBox">
           <div class="scan-line"></div>
 
-          <div class="chart-line">
-            <svg viewBox="0 0 600 220" preserveAspectRatio="none">
-              <path
-                d="M0,150 C50,80 90,60 140,110 C190,160 230,170 280,105 C330,40 380,30 430,95 C480,160 530,170 600,70"
-                fill="none"
-                stroke="rgba(162, 136, 255, 0.95)"
-                stroke-width="5"
-                stroke-linecap="round"
-                stroke-dasharray="900"
-                stroke-dashoffset="900">
-                <animate attributeName="stroke-dashoffset" from="900" to="0" dur="2.6s" fill="freeze" repeatCount="1"/>
-              </path>
+          <svg class="chart-svg" viewBox="0 0 600 220" preserveAspectRatio="none">
+            <path
+              id="previewPath"
+              class="chart-path"
+              d="M0,150 C50,80 90,60 140,110 C190,160 230,170 280,105 C330,40 380,30 430,95 C480,160 530,170 600,70">
+            </path>
 
-              <circle cx="140" cy="110" r="8" fill="rgba(255,255,255,0.95)">
-                <animate attributeName="r" values="8;10;8" dur="1.8s" repeatCount="indefinite"/>
-              </circle>
-              <circle cx="280" cy="105" r="8" fill="rgba(255,255,255,0.95)">
-                <animate attributeName="r" values="8;10;8" dur="1.6s" repeatCount="indefinite"/>
-              </circle>
-              <circle cx="430" cy="95" r="8" fill="rgba(255,255,255,0.95)">
-                <animate attributeName="r" values="8;10;8" dur="2s" repeatCount="indefinite"/>
-              </circle>
-            </svg>
-          </div>
+            <circle class="chart-node" cx="140" cy="110" r="8"></circle>
+            <circle class="chart-node" cx="280" cy="105" r="8"></circle>
+            <circle class="chart-node" cx="430" cy="95" r="8"></circle>
+          </svg>
 
-          <div class="moving-dot"></div>
+          <div class="moving-dot" id="movingDot"></div>
         </div>
 
         <div class="stats">
@@ -837,6 +835,39 @@
           section.classList.add('show');
         }, 150 + index * 120);
       });
+    });
+
+    const path = document.getElementById('previewPath');
+    const dot = document.getElementById('movingDot');
+    const chartBox = document.getElementById('chartBox');
+
+    function animateDot() {
+      if (!path || !dot || !chartBox) return;
+
+      const pathLength = path.getTotalLength();
+      const viewBoxWidth = 600;
+      const viewBoxHeight = 220;
+
+      function update() {
+        const t = (performance.now() * 0.12) % pathLength;
+        const point = path.getPointAtLength(t);
+
+        const scaleX = chartBox.clientWidth / viewBoxWidth;
+        const scaleY = chartBox.clientHeight / viewBoxHeight;
+
+        dot.style.left = (point.x * scaleX) + 'px';
+        dot.style.top = (point.y * scaleY) + 'px';
+
+        requestAnimationFrame(update);
+      }
+
+      update();
+    }
+
+    animateDot();
+
+    window.addEventListener('resize', () => {
+      animateDot();
     });
   </script>
 </body>
