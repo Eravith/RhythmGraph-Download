@@ -13,59 +13,89 @@
       scroll-behavior: smooth;
     }
 
+    :root {
+      --bg1: #070914;
+      --bg2: #0b1020;
+      --bg3: #111735;
+      --text: #f5f7ff;
+      --sub: #d8def7;
+      --muted: #9ba8d6;
+      --line: rgba(255,255,255,0.09);
+      --card: rgba(255,255,255,0.06);
+      --card-strong: rgba(255,255,255,0.10);
+      --purple: #a27cff;
+      --purple2: #7f62ff;
+      --blue: #77a7ff;
+      --glow: rgba(162,124,255,0.45);
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      color: white;
+      color: var(--text);
       background:
-        radial-gradient(circle at top, rgba(126, 92, 255, 0.22) 0%, rgba(126, 92, 255, 0.08) 20%, rgba(0, 0, 0, 0) 40%),
-        linear-gradient(180deg, #0b1020 0%, #090d19 40%, #060913 100%);
+        radial-gradient(circle at 20% 0%, rgba(127, 98, 255, 0.16), transparent 28%),
+        radial-gradient(circle at 85% 12%, rgba(119, 167, 255, 0.14), transparent 22%),
+        radial-gradient(circle at 50% 100%, rgba(162, 124, 255, 0.10), transparent 28%),
+        linear-gradient(180deg, var(--bg2) 0%, var(--bg1) 45%, #05070f 100%);
       overflow-x: hidden;
     }
 
-    .bg-orb {
+    .aurora,
+    .aurora::before,
+    .aurora::after {
       position: fixed;
-      border-radius: 50%;
-      filter: blur(40px);
+      inset: auto;
+      content: "";
       pointer-events: none;
       z-index: 0;
-      opacity: 0.7;
-      animation: floatOrb 12s ease-in-out infinite;
+      filter: blur(70px);
+      opacity: 0.6;
     }
 
-    .orb1 {
-      width: 320px;
-      height: 320px;
-      left: -80px;
-      top: 80px;
-      background: rgba(124, 92, 255, 0.24);
+    .aurora {
+      width: 380px;
+      height: 380px;
+      left: -120px;
+      top: 70px;
+      background: rgba(127, 98, 255, 0.22);
+      animation: drift1 18s ease-in-out infinite;
     }
 
-    .orb2 {
-      width: 260px;
-      height: 260px;
-      right: -60px;
-      top: 160px;
-      background: rgba(77, 137, 255, 0.18);
-      animation-delay: -4s;
-    }
-
-    .orb3 {
+    .aurora::before {
       width: 280px;
       height: 280px;
-      left: 50%;
-      bottom: 40px;
-      transform: translateX(-50%);
-      background: rgba(168, 93, 255, 0.14);
-      animation-delay: -8s;
+      right: -980px;
+      top: 120px;
+      background: rgba(119, 167, 255, 0.18);
+      animation: drift2 20s ease-in-out infinite;
     }
 
-    @keyframes floatOrb {
-      0%   { transform: translateY(0px) translateX(0px) scale(1); }
-      25%  { transform: translateY(-25px) translateX(15px) scale(1.04); }
-      50%  { transform: translateY(10px) translateX(-10px) scale(0.98); }
-      75%  { transform: translateY(-18px) translateX(8px) scale(1.03); }
-      100% { transform: translateY(0px) translateX(0px) scale(1); }
+    .aurora::after {
+      width: 320px;
+      height: 320px;
+      left: 45vw;
+      bottom: -80px;
+      background: rgba(187, 117, 255, 0.14);
+      animation: drift3 22s ease-in-out infinite;
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .stars span {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(255,255,255,0.7);
+      animation: twinkle 3s ease-in-out infinite;
     }
 
     .grid-overlay {
@@ -74,98 +104,116 @@
       z-index: 0;
       pointer-events: none;
       background-image:
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      mask-image: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent 85%);
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, rgba(255,255,255,0.38), transparent 90%);
     }
 
     .container {
       position: relative;
       z-index: 1;
-      max-width: 1120px;
+      max-width: 1180px;
       margin: 0 auto;
-      padding: 32px 20px 70px;
+      padding: 28px 20px 70px;
     }
 
     .topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
       animation: fadeUp 0.8s ease-out;
     }
 
     .logo {
       font-size: 24px;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 1px;
-      color: #f5f7ff;
+      color: white;
     }
 
     .logo span {
-      color: #9b82ff;
-      text-shadow: 0 0 14px rgba(155, 130, 255, 0.5);
+      color: var(--purple);
+      text-shadow: 0 0 18px rgba(162,124,255,0.5);
     }
 
-    .top-link {
-      color: #cfd6f7;
+    .top-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .chip-link {
+      color: #d9e0fb;
       text-decoration: none;
-      font-size: 15px;
-      border: 1px solid rgba(255,255,255,0.14);
-      padding: 10px 16px;
+      font-size: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 10px 15px;
       border-radius: 999px;
       background: rgba(255,255,255,0.04);
-      transition: 0.2s ease;
+      transition: 0.22s ease;
     }
 
-    .top-link:hover {
-      background: rgba(255,255,255,0.09);
+    .chip-link:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+      background: rgba(255,255,255,0.08);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
     }
 
     .hero {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
+      grid-template-columns: 1.02fr 0.98fr;
       gap: 28px;
       align-items: center;
-      min-height: 72vh;
-      margin-bottom: 36px;
+      min-height: 84vh;
+      margin-bottom: 18px;
     }
 
     .hero-left {
-      padding: 30px 0;
+      padding: 20px 0;
     }
 
     .badge {
-      display: inline-block;
-      margin-bottom: 20px;
-      padding: 8px 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      padding: 9px 14px;
       border-radius: 999px;
-      font-size: 14px;
-      font-weight: bold;
-      color: #efeaff;
-      background: rgba(124, 92, 255, 0.14);
-      border: 1px solid rgba(151, 123, 255, 0.35);
-      box-shadow: 0 0 25px rgba(124, 92, 255, 0.12);
+      font-size: 13px;
+      font-weight: 700;
+      color: #f1edff;
+      background: rgba(127, 98, 255, 0.14);
+      border: 1px solid rgba(162,124,255,0.35);
+      box-shadow: 0 0 25px rgba(127,98,255,0.12);
       animation: fadeUp 0.8s ease-out 0.1s both;
+    }
+
+    .badge::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #d8c6ff;
+      box-shadow: 0 0 12px #d8c6ff;
+      animation: pulseOrb 1.8s ease-in-out infinite;
     }
 
     h1 {
       margin: 0 0 18px;
-      font-size: 92px;
-      line-height: 0.95;
-      letter-spacing: -2px;
-      animation: titleGlow 3s ease-in-out infinite alternate, fadeUp 0.9s ease-out 0.2s both;
+      font-size: 96px;
+      line-height: 0.94;
+      letter-spacing: -2.6px;
+      animation: fadeUp 0.9s ease-out 0.2s both, titleGlow 3s ease-in-out infinite alternate;
     }
 
     .hero-text {
-      max-width: 680px;
+      max-width: 660px;
+      margin: 0 0 28px;
+      color: var(--sub);
       font-size: 21px;
       line-height: 1.9;
-      color: #d8def7;
-      margin-bottom: 30px;
       animation: fadeUp 0.9s ease-out 0.35s both;
     }
 
@@ -173,24 +221,24 @@
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
-      margin-bottom: 24px;
+      margin-bottom: 18px;
       animation: fadeUp 0.9s ease-out 0.5s both;
     }
 
     .download-btn {
+      position: relative;
       display: inline-block;
       padding: 18px 38px;
       border-radius: 18px;
-      background: linear-gradient(135deg, #7d62ff, #9c7cff);
+      background: linear-gradient(135deg, var(--purple2), var(--purple));
       color: white;
       text-decoration: none;
       font-size: 28px;
-      font-weight: bold;
-      box-shadow: 0 16px 40px rgba(125, 98, 255, 0.35);
-      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
-      position: relative;
+      font-weight: 800;
       overflow: hidden;
-      animation: pulseButton 2.4s ease-in-out infinite;
+      box-shadow: 0 18px 44px rgba(127,98,255,0.34);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+      animation: softPulse 2.6s ease-in-out infinite;
     }
 
     .download-btn::before {
@@ -198,17 +246,17 @@
       position: absolute;
       top: 0;
       left: -120%;
-      width: 80%;
+      width: 70%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.32), transparent);
       transform: skewX(-20deg);
-      animation: shine 3s linear infinite;
+      animation: sheen 3.2s linear infinite;
     }
 
     .download-btn:hover {
       transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 22px 50px rgba(125, 98, 255, 0.46);
-      filter: brightness(1.06);
+      box-shadow: 0 22px 54px rgba(127,98,255,0.46);
+      filter: brightness(1.05);
     }
 
     .secondary-btn {
@@ -219,21 +267,20 @@
       color: #edf0ff;
       text-decoration: none;
       font-size: 18px;
-      font-weight: bold;
+      font-weight: 700;
       border: 1px solid rgba(255,255,255,0.12);
       transition: 0.18s ease;
     }
 
     .secondary-btn:hover {
+      transform: translateY(-3px);
       background: rgba(255,255,255,0.10);
-      transform: translateY(-2px);
     }
 
     .hero-mini {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      margin-top: 18px;
       animation: fadeUp 1s ease-out 0.65s both;
     }
 
@@ -241,9 +288,9 @@
       padding: 10px 14px;
       border-radius: 999px;
       font-size: 14px;
-      color: #dce2ff;
+      color: #dfe5ff;
       background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.08);
       transition: 0.2s ease;
     }
 
@@ -252,65 +299,76 @@
       background: rgba(255,255,255,0.09);
     }
 
-    .hero-card {
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      animation: fadeUp 1s ease-out 0.35s both;
+    }
+
+    .glass-card {
       position: relative;
+      padding: 26px;
+      border-radius: 30px;
       background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.05));
       border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 30px;
-      padding: 28px;
-      min-height: 440px;
+      box-shadow: 0 18px 55px rgba(0,0,0,0.25);
       overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
-      animation: floatCard 5s ease-in-out infinite, fadeUp 1s ease-out 0.3s both;
+      backdrop-filter: blur(10px);
     }
 
-    .hero-card::before {
+    .glass-card::before {
       content: "";
       position: absolute;
-      inset: -20% auto auto -10%;
-      width: 220px;
-      height: 220px;
-      background: radial-gradient(circle, rgba(140, 108, 255, 0.45), transparent 70%);
-      filter: blur(10px);
+      width: 240px;
+      height: 240px;
+      left: -80px;
+      top: -80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(162,124,255,0.24), transparent 70%);
+      filter: blur(12px);
+      pointer-events: none;
     }
 
-    .hero-card::after {
+    .glass-card::after {
       content: "";
       position: absolute;
-      right: -60px;
-      bottom: -60px;
-      width: 220px;
-      height: 220px;
-      background: radial-gradient(circle, rgba(92, 150, 255, 0.24), transparent 70%);
-      filter: blur(14px);
+      width: 240px;
+      height: 240px;
+      right: -90px;
+      bottom: -90px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(119,167,255,0.16), transparent 70%);
+      filter: blur(16px);
+      pointer-events: none;
     }
 
     .card-label {
       position: relative;
-      z-index: 1;
-      color: #d6dcff;
-      font-size: 14px;
-      margin-bottom: 18px;
-      letter-spacing: 1px;
+      z-index: 2;
+      font-size: 13px;
+      font-weight: 700;
+      color: #dce3ff;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
+      margin-bottom: 14px;
     }
 
-    .fake-chart {
+    .preview-box {
       position: relative;
-      z-index: 1;
-      height: 235px;
-      margin-top: 16px;
-      border-radius: 22px;
+      z-index: 2;
+      height: 250px;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
       background:
         linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px),
-        linear-gradient(180deg, rgba(124, 92, 255, 0.06), rgba(255,255,255,0.02));
+        linear-gradient(180deg, rgba(127, 98, 255, 0.08), rgba(255,255,255,0.02));
       background-size: 100% 44px, 44px 100%, 100% 100%;
-      border: 1px solid rgba(255,255,255,0.08);
-      overflow: hidden;
     }
 
-    .chart-svg {
+    .preview-svg {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -318,57 +376,70 @@
       z-index: 2;
     }
 
-    .chart-path {
+    .preview-path {
       fill: none;
-      stroke: rgba(162, 136, 255, 0.95);
+      stroke: rgba(162,124,255,0.95);
       stroke-width: 5;
       stroke-linecap: round;
       stroke-dasharray: 900;
       stroke-dashoffset: 900;
-      animation: drawPath 2.6s ease forwards;
+      animation: drawPath 2.5s ease forwards;
     }
 
-    .chart-node {
-      fill: rgba(255,255,255,0.95);
-      transform-origin: center;
-      animation: pulseNode 1.8s ease-in-out infinite;
+    .glow-node {
+      fill: rgba(255,255,255,0.98);
+      filter: drop-shadow(0 0 14px rgba(255,255,255,0.8));
+      animation: nodeBreath 2.2s ease-in-out infinite;
     }
 
-    .chart-node:nth-of-type(2) {
-      animation-duration: 1.6s;
-    }
-
-    .chart-node:nth-of-type(3) {
-      animation-duration: 2s;
-    }
-
-    .moving-dot {
+    .moving-orb {
       position: absolute;
-      width: 16px;
-      height: 16px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
-      background: white;
+      background: radial-gradient(circle at 35% 35%, #ffffff, #efe5ff 45%, #b592ff 72%, #8c6cff 100%);
       box-shadow:
-        0 0 18px rgba(255,255,255,0.95),
-        0 0 34px rgba(145, 118, 255, 0.65);
-      z-index: 4;
-      left: 0;
-      top: 0;
+        0 0 20px rgba(255,255,255,0.85),
+        0 0 42px rgba(162,124,255,0.58);
       transform: translate(-50%, -50%);
+      z-index: 4;
+    }
+
+    .moving-orb::before,
+    .moving-orb::after {
+      content: "";
+      position: absolute;
+      inset: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.35);
+      opacity: 0;
+      animation: ripple 2.2s ease-out infinite;
+    }
+
+    .moving-orb::before {
+      width: 28px;
+      height: 28px;
+    }
+
+    .moving-orb::after {
+      width: 42px;
+      height: 42px;
+      animation-delay: 0.8s;
     }
 
     .scan-line {
       position: absolute;
       inset: 0;
+      z-index: 1;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.10), transparent);
       transform: translateX(-100%);
-      animation: scan 3.6s linear infinite;
-      z-index: 1;
+      animation: scan 4s linear infinite;
     }
 
     .stats {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
@@ -376,10 +447,10 @@
     }
 
     .stat-box {
+      padding: 14px 12px;
+      border-radius: 18px;
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 18px;
-      padding: 14px 12px;
       text-align: center;
       transition: transform 0.2s ease, background 0.2s ease;
     }
@@ -400,6 +471,97 @@
       color: #c9d1f3;
     }
 
+    .shot-card {
+      position: relative;
+      padding: 22px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.09);
+      box-shadow: 0 16px 42px rgba(0,0,0,0.20);
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+    }
+
+    .shot-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .shot-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #e8ecff;
+      letter-spacing: 0.4px;
+    }
+
+    .shot-sub {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .shot-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .shot {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      transform: translateY(0);
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+
+    .shot:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 18px 34px rgba(0,0,0,0.26);
+      border-color: rgba(162,124,255,0.35);
+    }
+
+    .shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.05) contrast(1.03);
+      transition: transform 0.28s ease, filter 0.28s ease;
+    }
+
+    .shot:hover img {
+      transform: scale(1.06);
+      filter: saturate(1.12) contrast(1.06);
+    }
+
+    .shot::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 55%, rgba(10,12,24,0.48) 100%);
+      pointer-events: none;
+    }
+
+    .shot-tag {
+      position: absolute;
+      left: 10px;
+      bottom: 9px;
+      z-index: 2;
+      font-size: 12px;
+      font-weight: 700;
+      color: white;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.32);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
     .section {
       margin-top: 26px;
       padding: 34px;
@@ -409,7 +571,7 @@
       box-shadow: 0 14px 35px rgba(0,0,0,0.18);
       backdrop-filter: blur(8px);
       opacity: 0;
-      transform: translateY(26px);
+      transform: translateY(28px);
       transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
@@ -427,7 +589,7 @@
       margin: 0;
       font-size: 18px;
       line-height: 1.9;
-      color: #dce2f7;
+      color: var(--sub);
     }
 
     .feature-grid {
@@ -438,30 +600,31 @@
     }
 
     .feature-card {
+      position: relative;
+      overflow: hidden;
       padding: 24px;
       border-radius: 24px;
       background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
       border: 1px solid rgba(255,255,255,0.10);
-      transition: transform 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
-      position: relative;
-      overflow: hidden;
+      transition: transform 0.24s ease, background 0.24s ease, box-shadow 0.24s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.11), rgba(255,255,255,0.05));
+      box-shadow: 0 18px 35px rgba(0,0,0,0.18);
     }
 
     .feature-card::before {
       content: "";
       position: absolute;
-      inset: auto -30% -40% auto;
-      width: 140px;
-      height: 140px;
-      background: radial-gradient(circle, rgba(124,92,255,0.18), transparent 70%);
+      width: 160px;
+      height: 160px;
+      right: -60px;
+      bottom: -60px;
+      background: radial-gradient(circle, rgba(162,124,255,0.18), transparent 70%);
       opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-7px);
-      background: linear-gradient(180deg, rgba(255,255,255,0.11), rgba(255,255,255,0.05));
-      box-shadow: 0 18px 35px rgba(0,0,0,0.18);
+      transition: opacity 0.24s ease;
     }
 
     .feature-card:hover::before {
@@ -469,18 +632,18 @@
     }
 
     .feature-icon {
-      width: 52px;
-      height: 52px;
+      width: 54px;
+      height: 54px;
       border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 24px;
       margin-bottom: 16px;
-      background: rgba(124, 92, 255, 0.18);
-      border: 1px solid rgba(156, 124, 255, 0.30);
-      box-shadow: 0 0 25px rgba(124, 92, 255, 0.14);
-      animation: iconBob 2.6s ease-in-out infinite;
+      background: rgba(127, 98, 255, 0.18);
+      border: 1px solid rgba(162,124,255,0.28);
+      box-shadow: 0 0 24px rgba(127,98,255,0.14);
+      animation: floatTiny 2.8s ease-in-out infinite;
     }
 
     .feature-card h3 {
@@ -507,12 +670,13 @@
       border-radius: 24px;
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.08);
-      transition: transform 0.2s ease, background 0.2s ease;
+      transition: transform 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
     }
 
     .info-card:hover {
       transform: translateY(-5px);
       background: rgba(255,255,255,0.08);
+      box-shadow: 0 14px 28px rgba(0,0,0,0.14);
     }
 
     .info-card h3 {
@@ -539,7 +703,7 @@
     @keyframes fadeUp {
       from {
         opacity: 0;
-        transform: translateY(24px);
+        transform: translateY(26px);
       }
       to {
         opacity: 1;
@@ -549,35 +713,50 @@
 
     @keyframes titleGlow {
       from {
-        text-shadow: 0 0 0 rgba(155,130,255,0);
+        text-shadow: 0 0 0 rgba(162,124,255,0);
       }
       to {
-        text-shadow: 0 0 26px rgba(155,130,255,0.24);
+        text-shadow: 0 0 28px rgba(162,124,255,0.24);
       }
     }
 
-    @keyframes shine {
+    @keyframes pulseOrb {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.25); opacity: 0.8; }
+    }
+
+    @keyframes softPulse {
+      0%, 100% {
+        box-shadow: 0 18px 44px rgba(127,98,255,0.34);
+      }
+      50% {
+        box-shadow: 0 22px 54px rgba(127,98,255,0.48);
+      }
+    }
+
+    @keyframes sheen {
       0% { left: -120%; }
       100% { left: 140%; }
     }
 
-    @keyframes pulseButton {
-      0%, 100% {
-        box-shadow: 0 16px 40px rgba(125, 98, 255, 0.35);
-      }
-      50% {
-        box-shadow: 0 20px 48px rgba(125, 98, 255, 0.48);
-      }
+    @keyframes drawPath {
+      to { stroke-dashoffset: 0; }
     }
 
-    @keyframes floatCard {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
+    @keyframes nodeBreath {
+      0%, 100% { transform: scale(1); opacity: 0.92; }
+      50% { transform: scale(1.18); opacity: 1; }
     }
 
-    @keyframes iconBob {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-4px); }
+    @keyframes ripple {
+      0% {
+        opacity: 0.45;
+        transform: translate(-50%, -50%) scale(0.55);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.7);
+      }
     }
 
     @keyframes scan {
@@ -585,71 +764,81 @@
       100% { transform: translateX(140%); }
     }
 
-    @keyframes drawPath {
-      to {
-        stroke-dashoffset: 0;
-      }
+    @keyframes floatTiny {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
     }
 
-    @keyframes pulseNode {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.25); }
+    @keyframes drift1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(28px, -18px) scale(1.06); }
     }
 
-    @media (max-width: 980px) {
+    @keyframes drift2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-22px, 18px) scale(0.98); }
+    }
+
+    @keyframes drift3 {
+      0%, 100% { transform: translate(-50%, 0) scale(1); }
+      50% { transform: translate(-48%, -18px) scale(1.04); }
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.25; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.7); }
+    }
+
+    @media (max-width: 1020px) {
       .hero {
         grid-template-columns: 1fr;
+        min-height: auto;
       }
 
       h1 {
-        font-size: 62px;
+        font-size: 66px;
       }
 
-      .feature-grid {
-        grid-template-columns: 1fr;
-      }
-
+      .shot-grid,
+      .feature-grid,
       .info-grid {
         grid-template-columns: 1fr;
+      }
+
+      .shot {
+        aspect-ratio: 16 / 9;
       }
     }
 
     @media (max-width: 640px) {
       .container {
-        padding: 20px 14px 50px;
+        padding: 18px 14px 50px;
       }
 
       .topbar {
-        margin-bottom: 24px;
-      }
-
-      .logo {
-        font-size: 20px;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
       }
 
       h1 {
-        font-size: 46px;
+        font-size: 48px;
       }
 
       .hero-text {
         font-size: 17px;
       }
 
-      .download-btn {
-        width: 100%;
-        text-align: center;
-        font-size: 24px;
-        padding: 16px 24px;
-      }
-
+      .download-btn,
       .secondary-btn {
         width: 100%;
         text-align: center;
       }
 
+      .glass-card,
       .section,
-      .hero-card {
-        padding: 24px;
+      .shot-card {
+        padding: 22px;
         border-radius: 22px;
       }
 
@@ -660,19 +849,43 @@
       .stats {
         grid-template-columns: 1fr;
       }
+
+      .preview-box {
+        height: 220px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="bg-orb orb1"></div>
-  <div class="bg-orb orb2"></div>
-  <div class="bg-orb orb3"></div>
+  <div class="aurora"></div>
+  <div class="stars">
+    <span style="left:5%; top:16%; animation-delay:0s;"></span>
+    <span style="left:14%; top:8%; animation-delay:1.2s;"></span>
+    <span style="left:22%; top:28%; animation-delay:0.8s;"></span>
+    <span style="left:31%; top:10%; animation-delay:2.2s;"></span>
+    <span style="left:40%; top:22%; animation-delay:1.7s;"></span>
+    <span style="left:52%; top:7%; animation-delay:0.4s;"></span>
+    <span style="left:60%; top:18%; animation-delay:2.4s;"></span>
+    <span style="left:68%; top:9%; animation-delay:1.1s;"></span>
+    <span style="left:76%; top:25%; animation-delay:2.9s;"></span>
+    <span style="left:84%; top:13%; animation-delay:0.9s;"></span>
+    <span style="left:91%; top:21%; animation-delay:1.9s;"></span>
+    <span style="left:12%; top:42%; animation-delay:2.6s;"></span>
+    <span style="left:27%; top:55%; animation-delay:1.5s;"></span>
+    <span style="left:47%; top:48%; animation-delay:2.1s;"></span>
+    <span style="left:72%; top:58%; animation-delay:0.7s;"></span>
+    <span style="left:88%; top:46%; animation-delay:1.4s;"></span>
+  </div>
   <div class="grid-overlay"></div>
 
   <div class="container">
     <div class="topbar">
       <div class="logo">Rhythm <span>Graph</span></div>
-      <a class="top-link" href="#about">게임 소개 보기</a>
+      <div class="top-links">
+        <a class="chip-link" href="#about">게임 소개</a>
+        <a class="chip-link" href="#features">특징</a>
+        <a class="chip-link" href="#screenshots">스크린샷</a>
+      </div>
     </div>
 
     <section class="hero">
@@ -680,55 +893,79 @@
         <div class="badge">GRAPH × RHYTHM GAME</div>
         <h1>Rhythm Graph</h1>
         <p class="hero-text">
-          그래프의 흐름과 리듬 게임의 타이밍을 결합한 독특한 게임.
-          화면의 움직임을 읽고 정확한 순간에 입력해 최고 점수와 콤보 기록에 도전하세요.
+          그래프의 흐름과 리듬 게임의 타이밍을 결합한 독특한 플레이.
+          화면의 움직임을 읽고 정확한 순간을 맞춰, 점수와 콤보를 쌓아가는 감각적인 리듬 게임입니다.
         </p>
 
         <div class="hero-buttons">
           <a class="download-btn" href="https://github.com/Eravith/RhythmGraph-Download/releases/download/v1.0/RhythmGraph.apk" target="_blank">다운로드</a>
-          <a class="secondary-btn" href="#features">특징 보기</a>
+          <a class="secondary-btn" href="#screenshots">스크린샷 보기</a>
         </div>
 
         <div class="hero-mini">
           <div class="mini-pill">빠른 반응 속도</div>
           <div class="mini-pill">정확한 타이밍</div>
-          <div class="mini-pill">몰입감 있는 플레이</div>
+          <div class="mini-pill">몽환적 그래프 비주얼</div>
         </div>
       </div>
 
-      <div class="hero-card">
-        <div class="card-label">Live Preview</div>
+      <div class="hero-right">
+        <div class="glass-card">
+          <div class="card-label">Live Preview</div>
 
-        <div class="fake-chart" id="chartBox">
-          <div class="scan-line"></div>
+          <div class="preview-box" id="chartBox">
+            <div class="scan-line"></div>
 
-          <svg class="chart-svg" viewBox="0 0 600 220" preserveAspectRatio="none">
-            <path
-              id="previewPath"
-              class="chart-path"
-              d="M0,150 C50,80 90,60 140,110 C190,160 230,170 280,105 C330,40 380,30 430,95 C480,160 530,170 600,70">
-            </path>
+            <svg class="preview-svg" viewBox="0 0 600 220" preserveAspectRatio="none">
+              <path
+                id="previewPath"
+                class="preview-path"
+                d="M0,145 C60,55 120,40 175,108 C225,170 285,170 340,95 C395,20 450,28 505,108 C548,170 575,165 600,72">
+              </path>
 
-            <circle class="chart-node" cx="140" cy="110" r="8"></circle>
-            <circle class="chart-node" cx="280" cy="105" r="8"></circle>
-            <circle class="chart-node" cx="430" cy="95" r="8"></circle>
-          </svg>
+              <circle class="glow-node" cx="175" cy="108" r="6"></circle>
+              <circle class="glow-node" cx="340" cy="95" r="6"></circle>
+              <circle class="glow-node" cx="505" cy="108" r="6"></circle>
+            </svg>
 
-          <div class="moving-dot" id="movingDot"></div>
+            <div class="moving-orb" id="movingOrb"></div>
+          </div>
+
+          <div class="stats">
+            <div class="stat-box">
+              <strong>Combo</strong>
+              <span>연속 판정 유지</span>
+            </div>
+            <div class="stat-box">
+              <strong>Timing</strong>
+              <span>정확한 입력</span>
+            </div>
+            <div class="stat-box">
+              <strong>Flow</strong>
+              <span>그래프 흐름 읽기</span>
+            </div>
+          </div>
         </div>
 
-        <div class="stats">
-          <div class="stat-box">
-            <strong>Combo</strong>
-            <span>연속 판정 유지</span>
+        <div class="shot-card" id="screenshots">
+          <div class="shot-header">
+            <div class="shot-title">게임 스크린샷</div>
+            <div class="shot-sub">이미지 파일만 바꾸면 됨</div>
           </div>
-          <div class="stat-box">
-            <strong>Timing</strong>
-            <span>정확한 입력</span>
-          </div>
-          <div class="stat-box">
-            <strong>Flow</strong>
-            <span>그래프 흐름 읽기</span>
+
+          <div class="shot-grid">
+            <div class="shot">
+              <img src="sin-mode.png" alt="Rhythm Graph sin mode screenshot">
+              <div class="shot-tag">SIN</div>
+            </div>
+            <div class="shot">
+              <img src="cos-mode.png" alt="Rhythm Graph cos mode screenshot">
+              <div class="shot-tag">COS</div>
+            </div>
+            <div class="shot">
+              <img src="tan-mode.png" alt="Rhythm Graph tan mode screenshot">
+              <div class="shot-tag">TAN</div>
+            </div>
           </div>
         </div>
       </div>
@@ -737,9 +974,9 @@
     <section class="section" id="about">
       <h2 class="section-title">게임 소개</h2>
       <p class="section-text">
-        Rhythm Graph는 그래프와 리듬 요소를 결합한 게임입니다.
-        단순히 버튼을 누르는 것을 넘어서, 화면의 움직임과 흐름을 보고 가장 정확한 순간을 판단해야 합니다.
-        집중력, 반응 속도, 타이밍 감각을 동시에 시험하는 것이 이 게임의 핵심입니다.
+        Rhythm Graph는 수학적인 그래프의 흐름과 리듬 게임의 타이밍 요소를 결합한 게임입니다.
+        단순히 노트를 누르는 것이 아니라, 그래프가 흘러가는 방식과 시각적 리듬을 읽어야 더 좋은 판정을 얻을 수 있습니다.
+        화면의 아름다움과 플레이 감각이 함께 살아나는 것이 이 게임의 핵심입니다.
       </p>
     </section>
 
@@ -751,8 +988,8 @@
           <div class="feature-icon">🎵</div>
           <h3>리듬 중심 플레이</h3>
           <p>
-            박자와 타이밍에 맞는 정확한 입력이 중요합니다.
-            한 번의 실수보다, 꾸준한 정확도가 더 높은 점수를 만듭니다.
+            타이밍을 정확하게 맞추는 감각이 가장 중요합니다.
+            박자에 익숙해질수록 더 부드럽고 높은 점수의 플레이가 가능합니다.
           </p>
         </div>
 
@@ -760,17 +997,17 @@
           <div class="feature-icon">📈</div>
           <h3>그래프형 비주얼</h3>
           <p>
-            그래프가 흘러가는 듯한 화면 구성으로 독특한 분위기를 만듭니다.
-            시각적인 흐름 자체가 게임 플레이의 일부가 됩니다.
+            사인, 코사인, 탄젠트 같은 그래프 흐름이 화면 연출과 플레이 감각에 반영됩니다.
+            다른 리듬 게임과는 다른 독특한 분위기를 만듭니다.
           </p>
         </div>
 
         <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <h3>집중감 있는 진행</h3>
+          <div class="feature-icon">✨</div>
+          <h3>몽환적인 연출</h3>
           <p>
-            짧은 순간의 판단과 반응이 결과를 크게 바꿉니다.
-            빠르게 몰입할 수 있는 긴장감 있는 플레이가 특징입니다.
+            네온 보라빛 배경과 부드러운 움직임, 빛나는 포인트 효과로
+            차분하면서도 몰입감 있는 플레이 경험을 제공합니다.
           </p>
         </div>
       </div>
@@ -779,29 +1016,29 @@
     <section class="section">
       <h2 class="section-title">플레이 방법</h2>
       <p class="section-text">
-        화면에 나타나는 흐름과 노트를 보고 알맞은 순간에 입력하세요.
-        타이밍이 정확할수록 더 높은 점수를 얻을 수 있고,
-        미스를 줄이며 콤보를 이어가면 최고 기록에 도전할 수 있습니다.
+        화면에 나타나는 흐름과 입력 포인트를 보고 알맞은 순간에 입력하세요.
+        정확한 타이밍을 유지할수록 더 좋은 판정과 높은 콤보를 얻을 수 있습니다.
+        그래프의 리듬을 먼저 읽는 것이 고득점의 핵심입니다.
       </p>
 
       <div class="info-grid">
         <div class="info-card">
           <h3>플레이 포인트</h3>
           <ul>
-            <li>노트의 타이밍을 정확히 맞추기</li>
+            <li>그래프의 흐름을 먼저 읽기</li>
+            <li>입력 타이밍을 안정적으로 맞추기</li>
             <li>미스를 줄여 콤보 유지하기</li>
-            <li>화면 흐름을 먼저 읽고 반응하기</li>
-            <li>최고 점수와 기록 갱신에 도전하기</li>
+            <li>모드별 느낌 차이를 즐기기</li>
           </ul>
         </div>
 
         <div class="info-card">
-          <h3>앞으로 추가 예정</h3>
+          <h3>업데이트 예정</h3>
           <ul>
-            <li>새로운 스테이지와 음악</li>
+            <li>추가 음악과 배경 테마</li>
             <li>더 다양한 그래프 패턴</li>
-            <li>난이도 확장</li>
-            <li>업데이트 정보 페이지</li>
+            <li>난이도 및 모드 확장</li>
+            <li>업데이트 로그 섹션</li>
           </ul>
         </div>
       </div>
@@ -821,54 +1058,51 @@
           entry.target.classList.add('show');
         }
       });
-    }, {
-      threshold: 0.15
-    });
+    }, { threshold: 0.15 });
 
-    sections.forEach((section) => {
-      observer.observe(section);
-    });
+    sections.forEach((section) => observer.observe(section));
 
     window.addEventListener('load', () => {
-      document.querySelectorAll('.section').forEach((section, index) => {
+      sections.forEach((section, index) => {
         setTimeout(() => {
           section.classList.add('show');
-        }, 150 + index * 120);
+        }, 180 + index * 120);
       });
     });
 
     const path = document.getElementById('previewPath');
-    const dot = document.getElementById('movingDot');
+    const orb = document.getElementById('movingOrb');
     const chartBox = document.getElementById('chartBox');
 
-    function animateDot() {
-      if (!path || !dot || !chartBox) return;
+    let animId = null;
 
-      const pathLength = path.getTotalLength();
+    function animateOrb() {
+      if (!path || !orb || !chartBox) return;
+
+      const totalLength = path.getTotalLength();
       const viewBoxWidth = 600;
       const viewBoxHeight = 220;
 
-      function update() {
-        const t = (performance.now() * 0.12) % pathLength;
-        const point = path.getPointAtLength(t);
+      function step(time) {
+        const speed = 0.09;
+        const distance = (time * speed) % totalLength;
+        const point = path.getPointAtLength(distance);
 
         const scaleX = chartBox.clientWidth / viewBoxWidth;
         const scaleY = chartBox.clientHeight / viewBoxHeight;
 
-        dot.style.left = (point.x * scaleX) + 'px';
-        dot.style.top = (point.y * scaleY) + 'px';
+        orb.style.left = (point.x * scaleX) + 'px';
+        orb.style.top = (point.y * scaleY) + 'px';
 
-        requestAnimationFrame(update);
+        animId = requestAnimationFrame(step);
       }
 
-      update();
+      if (animId) cancelAnimationFrame(animId);
+      animId = requestAnimationFrame(step);
     }
 
-    animateDot();
-
-    window.addEventListener('resize', () => {
-      animateDot();
-    });
+    animateOrb();
+    window.addEventListener('resize', animateOrb);
   </script>
 </body>
 </html>
